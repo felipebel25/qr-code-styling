@@ -1,6 +1,6 @@
 {
-  "name": "@felipe/qr-code-styling",
-  "version": "1.0.0",
+  "name": "felipe-qr-code-styling",
+  "version": "1.0.1",
   "description": "Add a style and an image to your QR code, this library is by https://github.com/kozakdenys/qr-code-styling/tree/master",
   "main": "lib/qr-code-styling.js",
   "types": "lib/index.d.ts",
