@@ -1,6 +1,9 @@
 {
   "name": "felipe-qr-code-styling",
   "version": "1.0.1",
+  "publishConfig": {
+    "access": "public"
+  },
   "description": "Add a style and an image to your QR code, this library is by https://github.com/kozakdenys/qr-code-styling/tree/master",
   "main": "lib/qr-code-styling.js",
   "types": "lib/index.d.ts",
@@ -13,7 +16,7 @@
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^4.13.0",
     "@typescript-eslint/parser": "^4.13.0",
-    "canvas": "^2.6.1",
+    "canvas": "^2.8.0",
     "clean-webpack-plugin": "^3.0.0",
     "eslint": "^7.17.0",
     "eslint-config-prettier": "^7.1.0",
