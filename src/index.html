@@ -5,20 +5,58 @@
         <title>QR Code Styling</title>
     </head>
     <body>
+      <h2 style="font-size: 2rem;">Ojos</h2>
+      <div style="display: flex;">
         <div id="canvas"></div>
         <div id="canvas2"></div>
+        <div id="canvas3"></div>
+        <div id="canvas4"></div>
+        <div id="canvas5"></div>
+        <div id="canvas6"></div>
+        </div>
+      <h2 style="font-size: 2rem;">Cuadrados</h2>
+      <div style="display: flex;">
+        <div id="canvas7"></div>
+        <div id="canvas8"></div>
+        <div id="canvas9"></div>
+        <div id="canvas10"></div>
+        <div id="canvas11"></div>
+        </div>
+        <h2 style="font-size: 2rem;">Bodys</h2>
+        <div style="display: flex;">
+          <div id="canvas12"></div>
+          <div id="canvas13"></div>
+          <div id="canvas14"></div>
+          <div id="canvas15"></div>
+          <div id="canvas16"></div>
+          <div id="canvas17"></div>
+          </div>
         <script type="text/javascript">
-            const options = {
-              width: 500,
-              height: 500,
-              data: "h",
+            const options2 = {
+              width: 550,
+              height: 550,
+              data: "https://qr-code-styling.com",
               image: "https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg",
               dotsOptions: {
-                type: "extra-rounded",
+                type: "dots",
+                // gradient: {
+                //   type: "linear", //radial,
+                //   rotation: Math.PI/2,
+                //   colorStops: [{ offset: 0, color: 'blue' }, { offset: 0.5, color: 'red' }, { offset: 1, color: 'green' }]
+                // },
+              },
+              cornersDotOptions:{
+                type:"extra-rounded",
                 gradient: {
-                  type: "linear", //radial,
-                  rotation: Math.PI/2,
-                  colorStops: [{ offset: 0, color: 'blue' }, { offset: 0.5, color: 'red' }, { offset: 1, color: 'green' }]
+                  type: "linear",
+                  rotation: Math.PI * 0.2,
+                  colorStops: [{
+                    offset: 0,
+                    color: 'blue'
+                  }, {
+                    offset: 1,
+                    color: 'red'
+                  }]
                 },
               },
               cornersSquareOptions: {
@@ -38,18 +76,147 @@
               imageOptions: {
                 crossOrigin: "anonymous",
                 margin: 30
-              }
+              },
+              type:"canvas"
             };
-          const qrCode = new QRCodeStyling(options);
-          const qrCode2 = new QRCodeStyling({
-            ...options,
-            type: 'svg',
+          // eyes
+           const qrCode = new QRCodeStyling({
+             ...options2,
+             cornersDotOptions:{
+               type:"rounded"
+             }
+           });
+           const qrCode3 = new QRCodeStyling({
+             ...options2,
+             cornersDotOptions:{
+               type:"square"
+             }
+           });
+           const qrCode2 = new QRCodeStyling(options2);
+           const qrCode4 = new QRCodeStyling({
+             ...options2,
+             cornersDotOptions:{
+               type:"dot"
+             }
+           });
+           const qrCode5 = new QRCodeStyling({
+             ...options2,
+             cornersDotOptions:{
+               type:"classy"
+             }
+           });
+           const qrCode6 = new QRCodeStyling({
+             ...options2,
+             cornersDotOptions:{
+               type:"dots"
+             }
+           });
+          // squares
+          const qrCode7 = new QRCodeStyling({
+            ...options2,
+            cornersSquareOptions:{
+              ...options2.cornersSquareOptions,
+              type:"square",
+            }
           });
+          const qrCode8 = new QRCodeStyling({
+            ...options2,
+            cornersSquareOptions:{
+              ...options2.cornersSquareOptions,
+              type:"dot",
 
-            qrCode.append(document.getElementById("canvas"));
-            qrCode2.append(document.getElementById("canvas2"));
+            }
+          });
+          const qrCode9 = new QRCodeStyling({
+            ...options2,
+            cornersSquareOptions:{
+              ...options2.cornersSquareOptions,
+              type:"extra-rounded",
 
-            // qrCode2.download()
+            }
+          });
+          const qrCode10 = new QRCodeStyling({
+            ...options2,
+            cornersSquareOptions:{
+              ...options2.cornersSquareOptions,
+              type:"dots",
+            }
+          });
+          const qrCode11 = new QRCodeStyling({
+            ...options2,
+            cornersSquareOptions:{
+              ...options2.cornersSquareOptions,
+              type:"classy",
+            }
+          });
+          // bodys
+          const qrCode12 = new QRCodeStyling({
+            ...options2,
+            dotsOptions:{
+              ...options2.dotsOptions,
+              type:"square",
+            }
+          });
+          const qrCode13 = new QRCodeStyling({
+            ...options2,
+            dotsOptions:{
+              ...options2.dotsOptions,
+              type:"dots",
+
+            }
+          });
+          const qrCode14 = new QRCodeStyling({
+            ...options2,
+            dotsOptions:{
+              ...options2.dotsOptions,
+              type:"extra-rounded",
+
+            }
+          });
+          const qrCode15 = new QRCodeStyling({
+            ...options2,
+            dotsOptions:{
+              ...options2.dotsOptions,
+              type:"rounded",
+            }
+          });
+          const qrCode16 = new QRCodeStyling({
+            ...options2,
+            dotsOptions:{
+              ...options2.dotsOptions,
+              type:"classy",
+            }
+          });
+          const qrCode17 = new QRCodeStyling({
+            ...options2,
+            dotsOptions:{
+              ...options2.dotsOptions,
+              type:"classy-rounded",
+            }
+          });
+          //eyes
+           qrCode.append(document.getElementById("canvas"));
+           qrCode2.append(document.getElementById("canvas2"));
+           qrCode3.append(document.getElementById("canvas3"));
+           qrCode4.append(document.getElementById("canvas4"));
+           qrCode5.append(document.getElementById("canvas5"));
+           qrCode6.append(document.getElementById("canvas6"));
+        //squares
+          qrCode7.append(document.getElementById("canvas7"));
+          qrCode8.append(document.getElementById("canvas8"));
+          qrCode9.append(document.getElementById("canvas9"));
+          qrCode10.append(document.getElementById("canvas10"));
+          qrCode11.append(document.getElementById("canvas11"));
+          //body
+          qrCode12.append(document.getElementById("canvas12"));
+          qrCode13.append(document.getElementById("canvas13"));
+          qrCode14.append(document.getElementById("canvas14"));
+          qrCode15.append(document.getElementById("canvas15"));
+          qrCode16.append(document.getElementById("canvas16"));
+          qrCode17.append(document.getElementById("canvas17"));
+
+          
+          // qrCode2.download()
         </script>
     </body>
 </html>

@@ -2,13 +2,14 @@ export interface UnknownObject {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any;
 }
-
+// dots
 export type DotType = "dots" | "rounded" | "classy" | "classy-rounded" | "square" | "extra-rounded";
-export type CornerDotType = "dot" | "square";
-export type CornerSquareType = "dot" | "square" | "extra-rounded";
+export type CornerDotType = "dots" | "dot" | "square" | "extra-rounded" | "classy" | "classy-rounded" | "rounded";
+export type CornerSquareType = "dot" | "dots" | "square" | "extra-rounded" | "classy" | "classy-rounded";
+
 export type Extension = "svg" | "png" | "jpeg" | "webp";
 export type GradientType = "radial" | "linear";
-export type DrawType = "canvas" | "svg";
+export type DrawType = "canvas";
 
 export type Gradient = {
   type: GradientType;

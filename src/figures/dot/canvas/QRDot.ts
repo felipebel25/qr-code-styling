@@ -52,18 +52,19 @@ export default class QRDot {
     context.translate(cx, cy);
     rotation && context.rotate(rotation);
     draw();
-    context.closePath();
     rotation && context.rotate(-rotation);
     context.translate(-cx, -cy);
+    context.closePath();
   }
 
   _basicDot(args: BasicFigureDrawArgsCanvas): void {
-    const { size, context } = args;
-
+    const { x, y, size, context } = args;
     this._rotateFigure({
       ...args,
       draw: () => {
-        context.arc(0, 0, size / 2, 0, Math.PI * 2);
+        context.moveTo(0, 0);
+        context.arc(0, 0, size / 2, x - Math.PI * x, x + y);
+        context.fill();
       }
     });
   }

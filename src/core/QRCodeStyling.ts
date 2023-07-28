@@ -2,7 +2,6 @@ import getMode from "../tools/getMode";
 import mergeDeep from "../tools/merge";
 import downloadURI from "../tools/downloadURI";
 import QRCanvas from "./QRCanvas";
-import QRSVG from "./QRSVG";
 import drawTypes from "../constants/drawTypes";
 
 import defaultOptions, { RequiredOptions } from "./QROptions";
@@ -14,7 +13,6 @@ export default class QRCodeStyling {
   _options: RequiredOptions;
   _container?: HTMLElement;
   _canvas?: QRCanvas;
-  _svg?: QRSVG;
   _qr?: QRCode;
   _canvasDrawingPromise?: Promise<void>;
   _svgDrawingPromise?: Promise<void>;
@@ -30,38 +28,22 @@ export default class QRCodeStyling {
     }
   }
 
-  async _getQRStylingElement(extension: Extension = "png"): Promise<QRCanvas | QRSVG> {
+  async _getQRStylingElement(extension: Extension = "png"): Promise<QRCanvas> {
     if (!this._qr) throw "QR code is empty";
 
-    if (extension.toLowerCase() === "svg") {
-      let promise, svg: QRSVG;
+    let promise, canvas: QRCanvas;
 
-      if (this._svg && this._svgDrawingPromise) {
-        svg = this._svg;
-        promise = this._svgDrawingPromise;
-      } else {
-        svg = new QRSVG(this._options);
-        promise = svg.drawQR(this._qr);
-      }
-
-      await promise;
-
-      return svg;
+    if (this._canvas && this._canvasDrawingPromise) {
+      canvas = this._canvas;
+      promise = this._canvasDrawingPromise;
     } else {
-      let promise, canvas: QRCanvas;
-
-      if (this._canvas && this._canvasDrawingPromise) {
-        canvas = this._canvas;
-        promise = this._canvasDrawingPromise;
-      } else {
-        canvas = new QRCanvas(this._options);
-        promise = canvas.drawQR(this._qr);
-      }
-
-      await promise;
-
-      return canvas;
+      canvas = new QRCanvas(this._options);
+      promise = canvas.drawQR(this._qr);
     }
+
+    await promise;
+
+    return canvas;
   }
 
   update(options?: Partial<Options>): void {
@@ -80,14 +62,7 @@ export default class QRCodeStyling {
       this._canvas = new QRCanvas(this._options);
       this._canvasDrawingPromise = this._canvas.drawQR(this._qr);
       this._svgDrawingPromise = undefined;
-      this._svg = undefined;
-    } else {
-      this._svg = new QRSVG(this._options);
-      this._svgDrawingPromise = this._svg.drawQR(this._qr);
-      this._canvasDrawingPromise = undefined;
-      this._canvas = undefined;
     }
-
     this.append(this._container);
   }
 
@@ -104,10 +79,6 @@ export default class QRCodeStyling {
       if (this._canvas) {
         container.appendChild(this._canvas.getCanvas());
       }
-    } else {
-      if (this._svg) {
-        container.appendChild(this._svg.getElement());
-      }
     }
 
     this._container = container;
@@ -117,16 +88,9 @@ export default class QRCodeStyling {
     if (!this._qr) throw "QR code is empty";
     const element = await this._getQRStylingElement(extension);
 
-    if (extension.toLowerCase() === "svg") {
-      const serializer = new XMLSerializer();
-      const source = serializer.serializeToString(((element as unknown) as QRSVG).getElement());
-
-      return new Blob(['<?xml version="1.0" standalone="no"?>\r\n' + source], { type: "image/svg+xml" });
-    } else {
-      return new Promise((resolve) =>
-        ((element as unknown) as QRCanvas).getCanvas().toBlob(resolve, `image/${extension}`, 1)
-      );
-    }
+    return new Promise((resolve) =>
+      (element as unknown as QRCanvas).getCanvas().toBlob(resolve, `image/${extension}`, 1)
+    );
   }
 
   async download(downloadOptions?: Partial<DownloadOptions> | string): Promise<void> {
@@ -151,16 +115,7 @@ export default class QRCodeStyling {
 
     const element = await this._getQRStylingElement(extension);
 
-    if (extension.toLowerCase() === "svg") {
-      const serializer = new XMLSerializer();
-      let source = serializer.serializeToString(((element as unknown) as QRSVG).getElement());
-
-      source = '<?xml version="1.0" standalone="no"?>\r\n' + source;
-      const url = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(source);
-      downloadURI(url, `${name}.svg`);
-    } else {
-      const url = ((element as unknown) as QRCanvas).getCanvas().toDataURL(`image/${extension}`);
-      downloadURI(url, `${name}.${extension}`);
-    }
+    const url = (element as unknown as QRCanvas).getCanvas().toDataURL(`image/${extension}`);
+    downloadURI(url, `${name}.${extension}`);
   }
 }
