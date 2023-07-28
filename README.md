@@ -1,11 +1,13 @@
 # QR Code Styling
-[![Version](https://img.shields.io/npm/v/qr-code-styling.svg)](https://www.npmjs.org/package/qr-code-styling)
+[![Version](https://img.shields.io/npm/v/felipe-qr-code-styling.svg)](https://www.npmjs.com/package/felipe-qr-code-styling)
 
 JavaScript library for generating QR codes with a logo and styling.
-
+This Library resolve the problem: self is not defiend in NextJs.
+And I add more styles for the qrCodes.
 Try it here https://qr-code-styling.com
 
 If you have issues / suggestions / notes / questions, please open an issue or contact me. Let's create a cool library together.
+email: felipemedina.developer@gmail.com
 ### Examples
 <p float="left">
 <img style="display:inline-block" src="https://raw.githubusercontent.com/kozakdenys/qr-code-styling/master/src/assets/facebook_example_new.png" width="240" />
@@ -89,7 +91,7 @@ Property               |Type                     |Default Value|Description
 -----------------------|-------------------------|-------------|-----------------------------------------------------
 width                  |number                   |`300`        |Size of canvas
 height                 |number                   |`300`        |Size of canvas
-type                   |string (`'canvas' 'svg'`)|`canvas`     |The type of the element that will be rendered
+type                   |string (`'canvas'`)|`canvas`     |The type of the element that will be rendered
 data                   |string                   |             |The date will be encoded to the QR code
 image                  |string                   |             |The image will be copied to the center of the QR code
 margin                 |number                   |`0`          |Margin around canvas
@@ -138,7 +140,7 @@ Property|Type                                     |Default Value|Description
 --------|-----------------------------------------|-------------|-----------------
 color   |string                                   |             |Color of Corners Square
 gradient|object                                   |             |Gradient of Corners Square
-type    |string (`'dot' 'square' 'extra-rounded'`)|             |Style of Corners Square
+type    |string (`'dot' 'dots' 'square' 'extra-rounded' 'classy'`)|             |Style of Corners Square
 
 `options.cornersDotOptions` structure
 
@@ -146,7 +148,7 @@ Property|Type                     |Default Value|Description
 --------|-------------------------|-------------|-----------------
 color   |string                   |             |Color of Corners Dot
 gradient|object                   |             |Gradient of Corners Dot
-type    |string (`'dot' 'square'`)|             |Style of Corners Dot
+type    |string (`'dot' 'dots' 'square' 'extra-rounded' 'classy' 'classy-rounded'`)|             |Style of Corners Dot
 
 Gradient structure
 
